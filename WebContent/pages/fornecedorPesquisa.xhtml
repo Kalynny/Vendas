@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml"
+>
+
+
+
+
+<ui:define name="metadata">
+<f:metadata>
+
+<f:event listener="#{MBFornecedores.prepararPesquisa}" 
+type="preRenderView" />
+</f:metadata>
+</ui:define>
+
+<ui:define name="conteudo">
+
+
+
+<h:form>
+<p:toolbar>
+<f:facet name="left">
+<h:outputText value="Cadastro de Fornecedores" />
+</f:facet>
+</p:toolbar>
+<h:panelGrid columns="8">
+<p:outputLabel value="Razão Social:" />
+<p:inputText maxlength="50" size="30"/>
+<p:button value="Buscar" />
+<p:button value="Novo" outcome="/pages/fornecedorCadastro.xhtml"/>
+<p:commandButton value="Imprimir" actionListener="#{MBFornecedores.impfor}"/>
+<f:param name="proacao" value="Novo" />
+<f:param name="proacao" value="impfor" />
+
+</h:panelGrid>
+
+<p:dataTable emptyMessage="Nenhum Registro Cadastrado" value="#{MBFornecedores.itens}"
+filteredValue="#{MBFornecedores.itensFiltrados}"
+var="fornecedor"
+rows="10"
+paginator="true"
+>
+<p:column headerText="Código">
+<h:outputText value="#{fornecedor.codigo}" />
+</p:column>
+<p:column headerText="Razão Social" filterBy="#{fornecedor.rsocial}" sortBy="#{fornecedor.rsocial}">
+<h:outputText value="#{fornecedor.rsocial}" />
+</p:column>
+<p:column headerText="CNPJ" filterBy="#{fornecedor.cnpj}" sortBy="#{fornecedor.cnpj}">
+<h:outputText value="#{fornecedor.cnpj}" />
+</p:column>
+<p:column headerText="Fone" filterBy="#{fornecedor.fone}" sortBy="#{fornecedor.fone}">
+<h:outputText value="#{fornecedor.fone}" />
+</p:column>
+<p:column headerText="E-Mail" filterBy="#{fornecedor.email}" sortBy="#{fornecedor.email}">
+<h:outputText value="#{fornecedor.email}" />
+</p:column>
+<p:column headerText="Opções">
+<p:button icon="ui-icon-pencil" outcome="/pages/fornecedorCadastro.xhtml" >
+<f:param name="forcod" value="#{fornecedor.codigo}" />
+<f:param name="foracao" value="Editar" />
+</p:button>
+<p:button icon="ui-icon-trash" outcome="/pages/fornecedorCadastro.xhtml" >
+<f:param name="forcod" value="#{fornecedor.codigo}" />
+<f:param name="foracao" value="Excluir" />
+</p:button>
+</p:column>
+</p:dataTable>
+
+</h:form>
+
+</ui:define>
+
+</ui:composition>

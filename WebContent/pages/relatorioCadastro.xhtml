@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<ui:insert name="metadata" />	
+	
+<h:head>
+
+	<h:outputStylesheet library="css" name="style.css"/>
+	<h:outputScript library="js" name="scripts.js" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+	<title> Relatorio de Cadastro </title>
+	
+	
+</h:head>
+<h:body>
+				
+	<p:layout fullPage="true">
+	<p:growl id="msgGlobal"/>
+		<p:layoutUnit style="text-align:center;" position="north" header="SISTEMA DATASALES"
+			resizable="false" closable="false" collapsible="false">
+			
+	</p:layoutUnit>
+
+ 		<p:layoutUnit style="text-align:center;" position="south"
+ 			header="Desenvolvido por MK Tecnologia" resizable="false" 
+			closable="false" collapsible="false"> 
+		</p:layoutUnit> 
+		
+ 		<p:layoutUnit position="west" size="250" resizable="false"
+			closable="false" collapsible="false">
+
+			<h:form id="frmMnPrincipal">
+				<p:panelMenu id="pnlMnPrincipal">
+				
+					<h:panelGrid columns="35">
+						<p:inputText maxlength="30" size="40"/>
+						<p:commandButton value="Imprimir Cadastro de Produtos" actionListener="#{MBProdutos.imprimir}"/>
+						<f:param name="proacao" value="Novo" />
+						<f:param name="proacao" value="Imprimir" />
+										
+						<p:inputText maxlength="30" size="40"/>
+						<p:commandButton value="Imprimir Cadastro de Produtos" actionListener="#{MBProdutos.imprimir}"/>
+						<f:param name="proacao" value="Novo" />
+						<f:param name="proacao" value="Imprimir" />
+									
+						<p:inputText maxlength="30" size="40"/>
+						<p:commandButton value="Imprimir Cadastro de Produtos" actionListener="#{MBProdutos.imprimir}"/>
+						<f:param name="proacao" value="Novo" />
+						<f:param name="proacao" value="Imprimir" />
+					
+						<p:inputText maxlength="30" size="40"/>
+						<p:commandButton value="Imprimir Cadastro de Produtos" actionListener="#{MBProdutos.imprimir}"/>
+						<f:param name="proacao" value="Novo" />
+						<f:param name="proacao" value="Imprimir" />
+								
+						<p:inputText maxlength="30" size="40"/>
+						<p:commandButton value="Imprimir Cadastro de Produtos" actionListener="#{MBProdutos.imprimir}"/>
+						<f:param name="proacao" value="Novo" />
+						<f:param name="proacao" value="Imprimir" />
+					</h:panelGrid>
+																
+				</p:panelMenu>
+			</h:form>
+			
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center" resizable="false" closable="false"
+			collapsible="false">
+			<ui:insert name="conteudo" />		
+		</p:layoutUnit>
+	</p:layout>
+
+</h:body>
+</html>

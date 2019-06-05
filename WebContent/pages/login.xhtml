@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  
+<h:head>
+</h:head>
+  
+<h:body>
+	<p:growl id="msgGlobal"/>
+	<f:metadata/>
+      <h:form>
+      	<div align="center">
+      		<p:graphicImage style= "width: 200px;" library="img" name="Logo1.png"/>
+      	</div>
+      		<div align="center">
+          	  <p:messages id="messages" />
+            	<h1><h:outputText  id="bemVindo" value="Bem vindo(a) ao sistema."/></h1>
+            		
+            		<p:panelGrid columns="2" >
+            		
+            		   	<p:outputLabel for="cpf"  value="CPF : *"  />
+						<p:inputMask id="cpf" mask="999.999.999-99"  maxlength="14" value="#{autenticacaoBean.funcionarioLogado.cpf}" >
+                  		<f:validateBean/>
+                  		</p:inputMask>
+                  		
+                   		<p:outputLabel for="senha" value="Senha:"  />
+                  		<p:password id="senha" value="#{autenticacaoBean.funcionarioLogado.senha}"  >
+                  		<f:validateBean />
+                  		</p:password>
+                  		
+                   		<p:commandButton value="Autenticar *" update=":msgGlobal"
+                   		action="#{autenticacaoBean.autenticar}" ajax="false" >
+                   		</p:commandButton>
+                  		
+                   </p:panelGrid>
+         </div>
+      </h:form>
+	</h:body>
+</html>

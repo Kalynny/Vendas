@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml"
+>
+
+
+
+
+<ui:define name="metadata">
+<f:metadata>
+
+<f:event listener="#{MBEmpresas.prepararPesquisa}" 
+type="preRenderView" />
+</f:metadata>
+</ui:define>
+
+<ui:define name="conteudo">
+
+
+
+<h:form>
+<p:toolbar>
+<f:facet name="left">
+<h:outputText value="Cadastro de Empresas" />
+</f:facet>
+</p:toolbar>
+<h:panelGrid columns="6">
+<p:outputLabel value="Razão Social:" />
+<p:inputText maxlength="50" size="30"/>
+<p:button value="Buscar" />
+<p:button value="Novo" outcome="/pages/empresaCadastro.xhtml" />
+<p:commandButton value="Imprimir" actionListener="#{MBEmpresas.impemp}"/>
+<f:param name="proacao" value="Novo" />
+<f:param name="proacao" value="impemp" />
+
+</h:panelGrid>
+
+<p:dataTable emptyMessage="Nenhum Registro Cadastrado" value="#{MBEmpresas.itens}"
+filteredValue="#{MBEmpresas.itensFiltrados}"
+var="empresa"
+rows="10"
+paginator="true"
+>
+<p:column headerText="Código">
+<h:outputText value="#{empresa.codigo}" />
+</p:column>
+<p:column headerText="Razão Social" filterBy="#{empresa.rsocial}" sortBy="#{empresa.rsocial}">
+<h:outputText value="#{empresa.rsocial}" />
+</p:column>
+<p:column headerText="CNPJ" filterBy="#{empresa.cnpj}" sortBy="#{empresa.cnpj}" >
+<h:outputText value="#{empresa.cnpj}" />
+</p:column>
+<p:column headerText="Cidade" >
+<h:outputText value="#{empresa.cidade}" />
+</p:column>
+<p:column headerText="CEP" >
+<h:outputText value="#{empresa.cep}" />
+</p:column>
+<p:column headerText="Fone" >
+<h:outputText value="#{empresa.fone}" />
+</p:column>
+<p:column headerText="E-Mail" >
+<h:outputText value="#{empresa.email}" />
+</p:column>
+<p:column headerText="Opções">
+<p:button icon="ui-icon-pencil" outcome="/pages/empresaCadastro.xhtml" >
+<f:param name="empcod" value="#{empresa.codigo}" />
+<f:param name="empacao" value="Editar" />
+</p:button>
+<p:button icon="ui-icon-trash" outcome="/pages/empresaCadastro.xhtml" >
+<f:param name="empcod" value="#{empresa.codigo}" />
+<f:param name="empacao" value="Excluir" />
+</p:button>
+</p:column>
+</p:dataTable>
+
+</h:form>
+
+</ui:define>
+
+</ui:composition>

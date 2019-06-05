@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml"
+>
+
+
+<ui:define name="metadata">
+<f:metadata>
+<f:viewParam name="estacao" value="#{MBEstoques.acao}" />
+<f:viewParam name="estcod" value="#{MBEstoques.codigo}" />
+<f:event listener="#{MBEstoques.carregarCadastro}" 
+type="preRenderView" />
+</f:metadata>
+</ui:define>
+
+
+<ui:define name="conteudo">
+<h:form id="frmestcad">
+<p:toolbar>
+<f:facet name="left">
+<h:outputText value="Listagem de Estoque" />
+</f:facet>
+</p:toolbar>
+<h:panelGrid columns="2" id="pnestcad">
+<p:outputLabel value="Código:" />
+<p:inputText maxlength="20" size="10" readonly="true" value="#{MBEstoques.estoque.codigo}" />
+
+<p:outputLabel value="Código de Barras:" />
+<p:inputText maxlength="13" size="20"  value="#{MBEstoques.estoque.cbarras}"
+readonly="#{MBEstoques.acao == 'Excluir'}"  >
+<f:validateBean />
+</p:inputText>
+
+<p:outputLabel value="Descrição:" />
+<p:inputText maxlength="50" size="20"  value="#{MBEstoques.estoque.descricao}"
+readonly="#{MBEstoques.acao == 'Excluir'}"  >
+<f:validateBean />
+</p:inputText>
+
+<p:outputLabel value="Valor:" />
+<p:inputText  maxlength="50" size="20"  value="#{MBEstoques.estoque.preco}"
+readonly="#{MBEstoques.acao == 'Excluir'}"  >
+<f:validateBean />
+</p:inputText>
+
+<p:outputLabel value="Quantidade:" />
+<p:inputText maxlength="8" size="20"  value="#{MBEstoques.estoque.quantidade}"
+readonly="#{MBEstoques.acao == 'Excluir'}"  >
+<f:validateBean />
+</p:inputText>
+
+<p:outputLabel value="Fornecedor:" />
+<p:selectOneMenu  value="#{MBEstoques.estoque.fornecedor}"
+readonly="#{MBEstoques.acao == 'Excluir'}" 
+converter="fornecedoresConverter">
+ <f:selectItem itemValue="" itemLabel="Selecione um Fornecedor" />
+ <f:selectItems value="#{MBEstoques.listaFornecedor}"  var="fornecedor"
+ itemValue="#{fornecedor}" itemLabel="#{fornecedor.rsocial}" />
+  <f:validateBean />
+ </p:selectOneMenu>
+
+
+</h:panelGrid>
+
+<h:panelGrid columns="5">
+<p:commandButton value="Novo" actionListener="#{MBEstoques.novo}" 
+update=":msgGlobal :frmestcad:pnestcad"  rendered="#{MBEstoques.acao == 'Novo'}" />
+
+<p:commandButton value="Salvar" actionListener="#{MBEstoques.salvar}" 
+update=":msgGlobal :frmestcad:pnestcad" />
+
+<p:commandButton value="Excluir" actionListener="#{MBEstoques.excluir}" 
+update=":msgGlobal :frmestcad:pnestcad" rendered="#{MBEstoques.acao == 'Excluir'}" />
+
+<p:commandButton value="Editar"  actionListener="#{MBEstoques.editar}" 
+update=":msgGlobal :frmestcad:pnestcad" rendered="#{MBEstoques.acao == 'Editar'}" />
+
+<p:button value="Voltar" outcome="/pages/estoquePesquisa.xhtml" />
+
+</h:panelGrid>
+</h:form>
+
+</ui:define>
+
+
+</ui:composition>

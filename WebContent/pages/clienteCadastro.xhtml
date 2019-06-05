@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml"
+>
+
+
+<ui:define name="metadata">
+<f:metadata>
+<f:viewParam name="cliacao" value="#{MBClientes.acao}" />
+<f:viewParam name="clicod" value="#{MBClientes.codigo}" />
+<f:event listener="#{MBClientes.carregarCadastro}" 
+type="preRenderView" />
+</f:metadata>
+</ui:define>
+
+
+<ui:define name="conteudo">
+<h:form id="frmclicad">
+<p:toolbar>
+<f:facet name="left">
+<h:outputText value="Cadastro de Clientes" />
+</f:facet>
+</p:toolbar>
+<h:panelGrid columns="2" id="pnclicad">
+<p:outputLabel value="Código:" />
+<p:inputText maxlength="20" size="10" readonly="true" value="#{MBClientes.cliente.codigo}" />
+
+<p:outputLabel value="Nome do Cliente:"/>
+<p:inputText maxlength="30" size="20"  value="#{MBClientes.cliente.nome}" />
+
+<p:outputLabel value="Endereco:" />
+<p:inputText maxlength="30" size="20"  value="#{MBClientes.cliente.endereco}" />
+
+<p:outputLabel value="Bairro:" />
+<p:inputText maxlength="30" size="20"  value="#{MBClientes.cliente.bairro}" />
+
+<p:outputLabel value="Cidade:" />
+<p:inputText maxlength="30" size="20"  value="#{MBClientes.cliente.cidade}" />
+
+<p:outputLabel value="Estado:" />
+<p:inputText maxlength="02" size="20"  value="#{MBClientes.cliente.estado}" />
+
+<p:outputLabel value="Cep:" />
+<p:inputText maxlength="09" size="20"  value="#{MBClientes.cliente.cep}" />
+
+<p:outputLabel value="Fone:" />
+<p:inputMask mask="(99) 99999-9999" maxlength="15" size="20"  value="#{MBClientes.cliente.fone}" />
+
+<p:outputLabel value="E-mail:" />
+<p:inputText maxlength="30" size="20"  value="#{MBClientes.cliente.email}"
+readonly="#{MBClientes.acao == 'Excluir'}"  >
+<f:validateBean />
+</p:inputText>
+
+<p:outputLabel value="CPF:" />
+<p:inputMask mask="999.999.999-99" maxlength="50" size="20"  value="#{MBClientes.cliente.cpf}"
+readonly="#{MBClientes.acao == 'Excluir'}"  >
+<f:validateBean />
+</p:inputMask>
+
+</h:panelGrid>
+
+<h:panelGrid columns="5">
+<p:commandButton value="Novo" actionListener="#{MBClientes.novo}" 
+update=":msgGlobal :frmclicad:pnclicad"  rendered="#{MBClientes.acao == 'salvar'}" />
+
+<p:commandButton value="Salvar" actionListener="#{MBClientes.salvar}" 
+update=":msgGlobal :frmclicad:pnclicad" />
+
+<p:commandButton value="Excluir" actionListener="#{MBClientes.excluir}" 
+update=":msgGlobal :frmclicad:pnclicad" rendered="#{MBClientes.acao == 'Excluir'}" />
+
+<p:commandButton value="Editar"  actionListener="#{MBClientes.editar}" 
+update=":msgGlobal :frmclicad:pnclicad" rendered="#{MBClientes.acao == 'Editar'}" />
+
+<p:button value="Voltar" outcome="/pages/clientePesquisa.xhtml" />
+
+</h:panelGrid>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
