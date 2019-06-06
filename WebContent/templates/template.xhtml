@@ -45,8 +45,7 @@
 				
 					<p:submenu label="Arquivo">
 						<p:menuitem value="Principal"  outcome="/pages/principal.xhtml" />
-						<p:menuitem value="Logout" action="#{autenticacaoBean.sair}" 
-						/>
+						<p:menuitem value="Logout" action="#{autenticacaoBean.sair}" />
 					</p:submenu>
 					
 					<p:submenu label="Cadastros"  >
@@ -58,30 +57,38 @@
 					</p:submenu>
 					
 					<p:submenu label="Compras"  >  
-					<p:menuitem value="Pedido de Compras" outcome="/pages/compraCadastro.xhtml"/>
-					<p:menuitem value="Entrada Nota Fiscal Compras" outcome="/pages/compraCadastro.xhtml" />
-					<p:menuitem value="Cancelar pedido de Compras" outcome="/pages/compraCadastro.xhtml" />
+						<p:menuitem value="Pedido de Compras" outcome="/pages/compraCadastro.xhtml"/>
+						<p:menuitem value="Entrada Nota Fiscal Compras" outcome="/pages/compraCadastro.xhtml" />
+						<p:menuitem value="Cancelar pedido de Compras" outcome="/pages/compraCadastro.xhtml" />
 					</p:submenu>
 					
 					<p:submenu label="Estoque"  >
-					<p:menuitem value="Visualizar Estoque" outcome="/pages/estoquePesquisa.xhtml"/>
-					<p:menuitem value="Gerencia de Avarias" outcome="/pages/avariasPesquisa.xhtml" />
+						<p:menuitem value="Visualizar Estoque" outcome="/pages/estoquePesquisa.xhtml"/>
+						<p:menuitem value="Gerencia de Avarias" outcome="/pages/avariasPesquisa.xhtml" />
 					</p:submenu>
 
 					<p:submenu label="Vendas"  > 
-					<p:menuitem value="Orçamento de Vendas" outcome="/pages/orcamentoCadastro.xhtml"/>
-					<p:menuitem value="Pedido de Vendas" outcome="/pages/vendaCadastro.xhtml" />
+						<p:menuitem value="Orçamento de Vendas" outcome="/pages/orcamentoCadastro.xhtml"/>
+						<p:menuitem value="Pedido de Vendas" outcome="/pages/vendaCadastro.xhtml" />
+						<p:menuitem value="Cancelar Pedido de Vendas" outcome="/pages/vendaCadastro.xhtml" />
+					</p:submenu>
+					
+					<p:submenu label="Financeiro"  > 
+						<p:menuitem value="Recebimento de Caixa" outcome="/pages/orcamentoCadastro.xhtml"/>
+						<p:menuitem value="Sangria do Caixa" outcome="/pages/vendaCadastro.xhtml" />
+						<p:menuitem value="Contas a Pagar" outcome="/pages/vendaCadastro.xhtml" />
+						<p:menuitem value="Contas a Receber" outcome="/pages/vendaCadastro.xhtml" />
 					</p:submenu>
 					
 					<p:submenu label="Relatórios" >
-					<p:menuitem value="Relatório de Cadastro" outcome="/pages/relatoriovenda.xhtml" />
-					<p:menuitem value="Relatório de Compra" outcome="/pages/relatoriovenda.xhtml" />
-					<p:menuitem value="Relatório de Venda" outcome="/pages/relatoriovenda.xhtml" />
-					<p:menuitem value="Relatório de Avaria" outcome="/pages/relatoriovenda.xhtml" />
+						<p:menuitem value="Relatório de Cadastro" outcome="/pages/relatorioCadastro.xhtml" />
+						<p:menuitem value="Relatório de Compra" outcome="/pages/relatoriocompra.xhtml" />
+						<p:menuitem value="Relatório de Venda" outcome="/pages/relatoriovenda.xhtml" />
+						<p:menuitem value="Relatório de Avaria" outcome="/pages/relatorioAvaria.xhtml" />
 					</p:submenu>
 
 					<p:submenu label="Ajuda" >
-					<p:menuitem value="Ajuda do Sistema Data Sales" outcome="/pages/ajuda.xhtml" />
+					     <p:menuitem value="Ajuda do Sistema Data Sales" outcome="/pages/ajuda.xhtml" />
 					</p:submenu>
 
 				</p:panelMenu>

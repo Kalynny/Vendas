@@ -14,7 +14,7 @@ template="/templates/template.xhtml"
 	<h:outputScript library="js" name="scripts.js" />
 <p:toolbar>
 <f:facet name="left">
-<h:outputText value="Relatório de Compras" />
+<h:outputText value="Relatório de Avarias" />
 </f:facet>
 </p:toolbar>
 
@@ -29,8 +29,8 @@ template="/templates/template.xhtml"
 
 	<div align="left" >	
 		<h:panelGrid  >
-			 <p:graphicImage  style="width: 200px;" library="img" name="compras.png" />
-			 <p:commandButton value= "Pedido de Compras" actionListener="#{MBEmpresas.impemp}" style="width: 200px;"/>
+			 <p:graphicImage  style="width: 200px;" library="img" name="avarias.png" />
+			 <p:commandButton value= "Avarias" actionListener="#{MBEmpresas.impemp}" style="width: 200px;"/>
 			 <f:param name="proacao" value="impemp"/>
 		</h:panelGrid>
 	
