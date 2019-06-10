@@ -25,11 +25,10 @@ import net.sf.jasperreports.engine.JasperPrint;
 //import net.sf.jasperreports.engine.data.JRAbstractBeanDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
-@ManagedBean(name = "MBProdutos")
+@ManagedBean(name = "MBListagemVendas")
 @ViewScoped
-public class ProdutosBean {
-	private Produto produto;
-
+public class VendasListagemBean {
+     private Produto produto;
 	 private ArrayList<Produto>itens;
 	 private ArrayList<Produto>itensFiltrados;
 	 private String acao;
@@ -95,7 +94,7 @@ public class ProdutosBean {
 	 public void prepararPesquisa(){
 		
 	 try {
-	 ProdutosDAO fdao = new ProdutosDAO();
+		 ProdutosDAO fdao = new ProdutosDAO();
 	 itens = (ArrayList<Produto>) fdao.listar();
 	
 	 } catch (RuntimeException e) {
@@ -112,8 +111,10 @@ public class ProdutosBean {
 		     
 			
 			 if(codigo != null){
-								 
+				
+				 
 				 ProdutosDAO fdao = new ProdutosDAO();	
+			
 				 produto = fdao.buscarPorCodigo(codigo);
 				 
 			 }

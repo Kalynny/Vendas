@@ -25,13 +25,15 @@ template="/templates/template.xhtml"
                
         </h:panelGrid>
 	</div>
+<br/>	
+<br/>
+<br/>
 
-
-	<div align="left" >	
-		<h:panelGrid  >
-			 <p:graphicImage  style="width: 200px;" library="img" name="compras.png" />
-			 <p:commandButton value= "Pedido de Compras" actionListener="#{MBEmpresas.impemp}" style="width: 200px;"/>
-			 <f:param name="proacao" value="impemp"/>
+	<div align="center" >	
+		<h:panelGrid columns="1" >
+			 <p:graphicImage  style="width: 150px;" library="img" name="compras.png" />
+			 <p:commandButton value= "Pedido de Compras" actionListener="#{MBCompras.impcom}" style="width: 200px;"/>
+			 <f:param name="proacao" value="impcom"/>
 		</h:panelGrid>
 	
 	</div>

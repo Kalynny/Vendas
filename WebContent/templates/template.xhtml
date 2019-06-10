@@ -40,8 +40,8 @@
 		<p:layoutUnit position="west" size="250" resizable="false"
 			closable="false" collapsible="false">
 
-			<h:form id="frmMnPrincipal">
-				<p:panelMenu id="pnlMnPrincipal">
+			<h:form >
+				<p:panelMenu >
 				
 					<p:submenu label="Arquivo">
 						<p:menuitem value="Principal"  outcome="/pages/principal.xhtml" />
@@ -58,23 +58,23 @@
 					
 					<p:submenu label="Compras"  >  
 						<p:menuitem value="Pedido de Compras" outcome="/pages/compraCadastro.xhtml"/>
-						<p:menuitem value="Entrada Nota Fiscal Compras" outcome="/pages/compraCadastro.xhtml" />
-						<p:menuitem value="Cancelar pedido de Compras" outcome="/pages/compraCadastro.xhtml" />
+						<p:menuitem value="Cancelar pedido de Compras" outcome="/pages/compraListagemPesquisa.xhtml" />
 					</p:submenu>
 					
 					<p:submenu label="Estoque"  >
 						<p:menuitem value="Visualizar Estoque" outcome="/pages/estoquePesquisa.xhtml"/>
+						<p:menuitem value="Entrada Nota Fiscal Compras" outcome="/pages/compraCadastro.xhtml" />
 						<p:menuitem value="Gerencia de Avarias" outcome="/pages/avariasPesquisa.xhtml" />
 					</p:submenu>
 
 					<p:submenu label="Vendas"  > 
 						<p:menuitem value="Orçamento de Vendas" outcome="/pages/orcamentoCadastro.xhtml"/>
 						<p:menuitem value="Pedido de Vendas" outcome="/pages/vendaCadastro.xhtml" />
-						<p:menuitem value="Cancelar Pedido de Vendas" outcome="/pages/vendaCadastro.xhtml" />
+						<p:menuitem value="Cancelar Pedido de Vendas" outcome="/pages/vendaListagemPesquisa.xhtml" />
 					</p:submenu>
 					
 					<p:submenu label="Financeiro"  > 
-						<p:menuitem value="Recebimento de Caixa" outcome="/pages/orcamentoCadastro.xhtml"/>
+						<p:menuitem value="Recebimento de Caixa" outcome="/pages/financeiroPesquisa.xhtml"/>
 						<p:menuitem value="Sangria do Caixa" outcome="/pages/vendaCadastro.xhtml" />
 						<p:menuitem value="Contas a Pagar" outcome="/pages/vendaCadastro.xhtml" />
 						<p:menuitem value="Contas a Receber" outcome="/pages/vendaCadastro.xhtml" />

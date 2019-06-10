@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import br.com.Vendas.domain.Compras;
 import br.com.Vendas.util.HibernateUtil;
 
-public class ComprasDAO {
+public class ComprasListagemDAO {
 	
 	public Long salvar(Compras compra) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();

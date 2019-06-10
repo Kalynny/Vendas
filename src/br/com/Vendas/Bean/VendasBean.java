@@ -9,23 +9,36 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 //import javax.swing.JOptionPane;
 
+import org.omnifaces.util.Faces;
+import org.omnifaces.util.Messages;
+
+import com.mysql.jdbc.Connection;
+
+import br.com.Vendas.DAO.ClientesDAO;
+//import br.com.Vendas.DAO.FornecedoresDAO;
 //import br.com.Vendas.DAO.FornecedoresDAO;
 import br.com.Vendas.DAO.FuncionariosDAO;
 import br.com.Vendas.DAO.ItemDAO;
 import br.com.Vendas.DAO.ProdutosDAO;
 import br.com.Vendas.DAO.VendasDAO;
 import br.com.Vendas.Relatorio.Relatorio;
+import br.com.Vendas.domain.Cliente;
 //import br.com.Vendas.domain.Fornecedor;
 import br.com.Vendas.domain.Funcionario;
 import br.com.Vendas.domain.Item;
 import br.com.Vendas.domain.Produto;
 import br.com.Vendas.domain.Vendas;
+import br.com.Vendas.util.HibernateUtil;
 //import br.com.Vendas.util.HibernateUtil;
 import br.com.Vendas.util.JSFUtil;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 @ManagedBean(name = "MBVendas")
 @ViewScoped
-public class VendasBean {
+public class VendasBean<Venda> {
 
 	 private Produto produto;
 	 private Vendas vendaCadastro;
@@ -33,6 +46,9 @@ public class VendasBean {
 	 private List<Item>itensFiltrados;
 	 private List<Produto>produtos;
 	 private List<Produto>produtosFiltrados;
+	 private List<Venda>vendas;
+	 private String acao;
+	 private Long codigo;
 	
 	 @ManagedProperty(value = "#{autenticacaoBean}")
 	 private AutenticacaoBean autenticacaoBean;
@@ -105,12 +121,35 @@ public class VendasBean {
 		this.produtosFiltrados = produtosFiltrados;
 	}
 	 
+	 public List<Venda> getVendas() {
+		return vendas;
+	}
+	 
+	 public void setVendas(List<Venda> vendas) {
+		this.vendas = vendas;
+	}
+	 
+	 public String getAcao() {
+		return acao;
+	}
+	 
+	 public void setAcao(String acao) {
+		this.acao = acao;
+	}
+	 public Long getCodigo() {
+		return codigo;
+	}
+	 
+	 public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+	 
 
 	 
 	 public void carregarProdutos(){
 			
 		 try {
-			 ProdutosDAO fdao = new ProdutosDAO();
+		 ProdutosDAO fdao = new ProdutosDAO();
 		 produtos = (ArrayList<Produto>) fdao.listar();
 		
 		 } catch (RuntimeException e) {
@@ -282,5 +321,67 @@ public class VendasBean {
 		 }
 		 
 	 }
+	 
+	 @SuppressWarnings("deprecation")
+		public void impven() {
+		 
+		 	try {
+
+				String caminho = Faces.getRealPath("/reports/venda.jasper");
+
+				Connection conexao = (Connection) HibernateUtil.getConexao();
+
+				JasperPrint relatorio = JasperFillManager.fillReport(caminho, null, conexao);
+				JasperViewer view = new JasperViewer(relatorio, false);
+				view.show();
+
+				} catch (JRException erro) {
+				Messages.addGlobalError("Ocorreu um erro ao tentar gerar o relatório");
+				erro.printStackTrace();
+			}
+		}
+	 
+	 @SuppressWarnings("unchecked")
+	public void prepararPesquisaVenda(){
+			
+		 try {
+		 VendasDAO vdao = new VendasDAO();
+		 vendas = (ArrayList<Venda>) vdao.listar();
+		
+		 } catch (RuntimeException e) {
+		 JSFUtil.adicionarMensagemErro("ex.getMessage()");
+		 e.printStackTrace();
+		 }
+		
+		 }
+	 
+	 @SuppressWarnings({ "unchecked", "unused" })
+	public void carregarVendas(){
+
+		 try {
+		     			
+			 if(codigo == null){
+						 
+				 VendasDAO vdao = new VendasDAO();	
+				 vendas = (List<Venda>) vdao.buscarPorCodigo(codigo);
+				 
+			 }
+			 else
+				 {
+				vendas = (List<Venda>) new Vendas();
+				
+			 }
+			 
+			 ClientesDAO dao = new ClientesDAO();
+			 List<Cliente> listaCliente = dao.listar();
+		
+		 } catch (RuntimeException e) {
+		 JSFUtil.adicionarMensagemErro("ex.getMessage()");
+		 e.printStackTrace();
+		 }
+		
+		 }
+	 
+	 
 	
 }

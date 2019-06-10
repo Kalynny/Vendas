@@ -10,8 +10,6 @@ template="/templates/template.xhtml"
 
 <ui:define name="conteudo">
 
-<h:outputStylesheet library="css" name="style.css"/>
-	<h:outputScript library="js" name="scripts.js" />
 <p:toolbar>
 <f:facet name="left">
 <h:outputText value="Relatório de Vendas" />
@@ -25,13 +23,14 @@ template="/templates/template.xhtml"
                
         </h:panelGrid>
 	</div>
+<br/>
+<br/>
 
-
-	<div align="left" >	
-		<h:panelGrid  >
-			 <p:graphicImage  style="width: 200px;" library="img" name="sales.png" />
-			 <p:commandButton value= "Pedido de Vendas" actionListener="#{MBEmpresas.impemp}" style="width: 200px;"/>
-			 <f:param name="proacao" value="impemp"/>
+	<div align="center" >	
+		<h:panelGrid columns="1" >
+			 <p:graphicImage  style="width:150px;" library="img" name="sales.png" />
+			 <p:commandButton value= "Pedido de Vendas" actionListener="#{MBVendas.impven()}" style="width: 160px;"/>
+			 <f:param name="proacao" value="impven"/>
 		</h:panelGrid>
 	
 	</div>

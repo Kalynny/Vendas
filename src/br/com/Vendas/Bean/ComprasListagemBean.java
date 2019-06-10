@@ -6,19 +6,25 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
+
+//import com.mysql.jdbc.Connection;
+
+//import org.hibernate.Session;
+//import org.hibernate.Transaction;
+//import br.com.Vendas.DAO.FornecedoresDAO;
 import br.com.Vendas.DAO.FuncionariosDAO;
 import br.com.Vendas.DAO.ItemcomDAO;
 import br.com.Vendas.DAO.ProdutosDAO;
 import br.com.Vendas.Relatorio.Relatorio;
 import br.com.Vendas.DAO.ComprasDAO;
-import br.com.Vendas.DAO.FornecedoresDAO;
+//import br.com.Vendas.domain.Fornecedor;
 import br.com.Vendas.domain.Funcionario;
 import br.com.Vendas.domain.Itemcom;
 import br.com.Vendas.domain.Produto;
 import br.com.Vendas.domain.Compras;
-import br.com.Vendas.domain.Fornecedor;
 import br.com.Vendas.util.HibernateUtil;
 import br.com.Vendas.util.JSFUtil;
 import net.sf.jasperreports.engine.JRException;
@@ -28,7 +34,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 @ManagedBean(name = "MBCompras")
 @ViewScoped
-public class ComprasBean<Compra> {
+public class ComprasListagemBean {
 
 	 private Produto produto;
 	 private Compras compraCadastro;
@@ -36,9 +42,7 @@ public class ComprasBean<Compra> {
 	 private List<Itemcom>ItenscomFiltrados;
 	 private List<Produto>produtos;
 	 private List<Produto>produtosFiltrados;
-	 private List<Compra>compras;
-	 private String acao;
-	 private Long codigo;
+	
 	 
 	 public Compras getCompraCadastro() {
 		 if(compraCadastro == null){
@@ -99,34 +103,12 @@ public class ComprasBean<Compra> {
 		this.produtosFiltrados = produtosFiltrados;
 	}
 	 
-	 public List<Compra> getCompras() {
-		return compras;
-	}
-	 
-	 public void setCompras(List<Compra> compras) {
-		this.compras = compras;
-	}
-	 
-	 public String getAcao() {
-		return acao;
-	}
-	 
-	 public void setAcao(String acao) {
-		 this.acao = acao;
-	}
-	 
-	public Long getCodigo() {
-		return codigo;
-	}
-	
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
-	}
+
 	 
 	 public void carregarProdutos(){
 			
 		 try {
-		 ProdutosDAO fdao = new ProdutosDAO();
+			 ProdutosDAO fdao = new ProdutosDAO();
 		 produtos = (ArrayList<Produto>) fdao.listar();
 		
 		 } catch (RuntimeException e) {
@@ -325,47 +307,6 @@ public class ComprasBean<Compra> {
 				erro.printStackTrace();
 			}
 		}
-	 
-	 @SuppressWarnings("unchecked")
-		public void prepararPesquisaCompra(){
-				
-			 try {
-			 ComprasDAO cdao = new ComprasDAO();
-			 compras = (ArrayList<Compra>) cdao.listar();
-			
-			 } catch (RuntimeException e) {
-			 JSFUtil.adicionarMensagemErro("ex.getMessage()");
-			 e.printStackTrace();
-			 }
-			
-			 }
-	 
-	 @SuppressWarnings({ "unchecked", "unused" })
-		public void carregarCompras(){
-
-			 try {
-			     			
-				 if(codigo == null){
-							 
-					 ComprasDAO cdao = new ComprasDAO();	
-					 compras = (List<Compra>) cdao.buscarPorCodigo(codigo);
-					 
-				 }
-				 else
-					 {
-					compras = (List<Compra>) new Compras();
-					
-				 }
-				 
-				 FornecedoresDAO dao = new FornecedoresDAO();
-				 List<Fornecedor> listaFornecedor = dao.listar();
-			
-			 } catch (RuntimeException e) {
-			 JSFUtil.adicionarMensagemErro("ex.getMessage()");
-			 e.printStackTrace();
-			 }
-			
-			 }
 	 
 	 
 	

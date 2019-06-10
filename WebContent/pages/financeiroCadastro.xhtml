@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml">
+
+<ui:define name="metadata">
+<f:metadata>
+<f:viewParam name="venacao" value="#{MBVendas.acao}" />
+<f:viewParam name="vencod" value="#{MBVendas.codigo}" />
+<f:event listener="#{MBVendas.carregarVendas}" 
+type="preRenderView" />
+</f:metadata>
+</ui:define>
+
+
+<ui:define name="conteudo">
+<h:form id="frmvencad">
+<p:toolbar>
+<f:facet name="left">
+<h:outputText value="Recebimento de Vendas" />
+</f:facet>
+</p:toolbar>
+<br/>
+
+<h:panelGrid columns="2" id="pnvencad">
+<p:outputLabel value="Código:" />
+<h:outputText value="#{venda.codigo}" />
+
+<p:outputLabel value="Horário:"/>
+<h:outputText value="#{venda.horario}" />
+
+<p:outputLabel value="Valor Total"/>
+<h:outputText value="#{venda.valor_total}" />
+
+<p:outputLabel value="Funcionário"/>
+<h:outputText value="#{venda.funcionario.nome}" />
+
+<p:outputLabel value="Tipo de Pagamento:" />
+<p:selectOneMenu  value="#{MBFuncionarios.funcionario.funcao}"
+ readonly="#{MBFuncionarios.acao == 'Excluir'}" >
+ <f:selectItem itemValue="" itemLabel="Selecione um Tipo de Pagamento" />
+ <f:selectItem itemValue="A Vista" itemLabel="A Vista" />
+ <f:selectItem itemValue="Cheque" itemLabel="Cheque" />
+ <f:selectItem itemValue="Boleto" itemLabel="Boleto" />
+</p:selectOneMenu>
+</h:panelGrid>
+
+<h:panelGrid columns="2" align="center" >
+<p:commandButton value="Salvar" actionListener="#{MBVendas.salvar}" 
+update=":msgGlobal :frmvencad:pnvencad" />
+</h:panelGrid>
+</h:form>
+
+</ui:define>
+</ui:composition>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml"
+>
+
+
+<ui:define name="metadata">
+<f:metadata>
+<f:viewParam name="venacao" value="#{MBVendas.acao}" />
+<f:viewParam name="vencod" value="#{MBVendas.codigo}" />
+<f:event listener="#{MBVendas.carregarCadastro}" 
+type="preRenderView" />
+</f:metadata>
+</ui:define>
+
+
+<ui:define name="conteudo">
+<h:form id="frmvencad">
+<p:toolbar>
+<f:facet name="left">
+<h:outputText value="Cadastro de Avarias" />
+</f:facet>
+</p:toolbar>
+<h:panelGrid columns="2" id="pnvencad">
+<p:outputLabel value="Código:" />
+<p:inputText maxlength="20" size="10" readonly="true" value="#{MBVendas.vendaCadastro.codigo}" />
+
+<p:outputLabel value="Horário:" />
+<p:inputText maxlength="13" size="20" readonly="true" value="#{MBVendas.vendaCadastro.horario}">
+<f:validateBean />
+</p:inputText>
+
+<p:outputLabel value="Valor Total:" />
+<p:inputText maxlength="50" size="20" readonly="true"  value="#{MBVendas.vendaCadastro.valor_total}">
+<f:validateBean />
+</p:inputText>
+
+<p:outputLabel value="Funcionário:" />
+<p:inputText maxlength="8" size="20"  value="#{MBVendas.vendaCadastro.funcionario.nome}" >
+<f:validateBean />
+</p:inputText>
+</h:panelGrid>
+</h:form>
+
+</ui:define>
+</ui:composition>
