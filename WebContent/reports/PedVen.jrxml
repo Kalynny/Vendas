@@ -171,7 +171,7 @@ FROM vendas.tb_itens
 				<reportElement x="90" y="3" width="124" height="17" uuid="45e4a289-f809-4872-989d-c2120e3894c1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9c5fae0d-9e68-4825-96ab-8cc56795ad1a"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Bottom">
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pro_descricao}]]></textFieldExpression>

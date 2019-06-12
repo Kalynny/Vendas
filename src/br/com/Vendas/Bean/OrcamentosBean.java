@@ -5,21 +5,33 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 //import org.hibernate.Session;
 //import org.hibernate.Transaction;
 
+import org.omnifaces.util.Faces;
+import org.omnifaces.util.Messages;
+
+import com.mysql.jdbc.Connection;
+
 import br.com.Vendas.DAO.FuncionariosDAO;
 import br.com.Vendas.DAO.ItemorcDAO;
 import br.com.Vendas.DAO.ProdutosDAO;
+import br.com.Vendas.Relatorio.Relatorio;
 import br.com.Vendas.DAO.OrcamentosDAO;
 
 import br.com.Vendas.domain.Funcionario;
 import br.com.Vendas.domain.Itemorc;
 import br.com.Vendas.domain.Produto;
 import br.com.Vendas.domain.Orcamentos;
+import br.com.Vendas.util.HibernateUtil;
 //import br.com.Vendas.util.HibernateUtil;
 import br.com.Vendas.util.JSFUtil;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 @ManagedBean(name = "MBOrcamentos")
 @ViewScoped
@@ -32,6 +44,11 @@ public class OrcamentosBean {
 	 private List<Produto>produtos;
 	 private List<Produto>produtosFiltrados;
 	
+	 @ManagedProperty(value = "#{autenticacaoBean}")
+	 private AutenticacaoBean autenticacaoBean;
+	 @SuppressWarnings("unused")
+	private BigDecimal codigoOrcamento; 
+	 
 	 
 	 public Orcamentos getOrcamentoCadastro() {
 		 if(orcamentoCadastro == null){
@@ -90,6 +107,14 @@ public class OrcamentosBean {
 	 
 	 public void setProdutosFiltrados(List<Produto> produtosFiltrados) {
 		this.produtosFiltrados = produtosFiltrados;
+	}
+	 
+	 public AutenticacaoBean getAutenticacaoBean() {
+		return autenticacaoBean;
+	}
+	 
+	 public void setAutenticacaoBean(AutenticacaoBean autenticacaoBean) {
+		this.autenticacaoBean = autenticacaoBean;
 	}
 	 
 
@@ -203,7 +228,7 @@ public class OrcamentosBean {
 		 orcamentoCadastro.setHorario(new Date());
 		 
 		 FuncionariosDAO dao = new FuncionariosDAO();
-		 Funcionario funcionario = dao.buscarPorCodigo(4L);
+		 Funcionario funcionario = dao.buscarPorCodigo(autenticacaoBean.getFuncionarioLogado().getCodigo());
 		 orcamentoCadastro.setFuncionario(funcionario);
 	 }
 	 
@@ -226,10 +251,14 @@ public class OrcamentosBean {
 			 orcamentoCadastro.setValor_total(new BigDecimal("0.00"));
 			 Itensorc = new ArrayList<Itemorc>();
 		 
-		 JSFUtil.adicionarMensagemSucesso("Salvo com Sucesso");
+			 JSFUtil.adicionarMensagemSucesso("Salvo com Sucesso");
+		 
+		 	Relatorio re = new Relatorio();
+			re.relOrcamento(codigoOrcamento.intValue());
+			return;
 		
 		 } catch (RuntimeException e) {
-		 JSFUtil.adicionarMensagemErro("ex.getMessage155()");
+		 JSFUtil.adicionarMensagemErro("ex.getMessage()");
 		 e.printStackTrace();
 		 }
 		 
@@ -262,5 +291,24 @@ public class OrcamentosBean {
 		 }
 		 
 	 }
+	 
+	 @SuppressWarnings("deprecation")
+		public void imporc() {
+
+			try {
+
+				String caminho = Faces.getRealPath("/reports/Orcamento.jasper");
+
+				Connection conexao = (Connection) HibernateUtil.getConexao();
+
+				JasperPrint relatorio = JasperFillManager.fillReport(caminho, null, conexao);
+				JasperViewer view = new JasperViewer(relatorio, false);
+				view.show();
+
+			} catch (JRException erro) {
+				Messages.addGlobalError("Ocorreu um erro ao tentar gerar o relatório");
+				erro.printStackTrace();
+			}
+		}
 	
 }

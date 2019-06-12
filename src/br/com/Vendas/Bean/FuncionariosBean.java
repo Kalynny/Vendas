@@ -22,7 +22,7 @@ import net.sf.jasperreports.view.JasperViewer;
 @ManagedBean(name = "MBFuncionarios")
 @ViewScoped
 public class FuncionariosBean {
-	private Funcionario funcionario;
+	 private Funcionario funcionario;
 
 	 private ArrayList<Funcionario>itens;
 	 private ArrayList<Funcionario>itensFiltrados;

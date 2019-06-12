@@ -13,9 +13,11 @@ import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import br.com.Vendas.DAO.FornecedoresDAO;
-import br.com.Vendas.DAO.ProdutosDAO;
+
+import br.com.Vendas.DAO.AvariasDAO;
 import br.com.Vendas.domain.Fornecedor;
-import br.com.Vendas.domain.Produto;
+
+import br.com.Vendas.domain.Avaria;
 import br.com.Vendas.util.HibernateUtil;
 import br.com.Vendas.util.JSFUtil;
 import net.sf.jasperreports.engine.JRException;
@@ -25,13 +27,13 @@ import net.sf.jasperreports.engine.JasperPrint;
 //import net.sf.jasperreports.engine.data.JRAbstractBeanDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
-@ManagedBean(name = "MBProdutos")
+@ManagedBean(name = "MBAvarias")
 @ViewScoped
-public class ProdutosBean {
-	private Produto produto;
+public class AvariasBean {
+	 private Avaria avaria;
 
-	 private ArrayList<Produto>itens;
-	 private ArrayList<Produto>itensFiltrados;
+	 private ArrayList<Avaria>itensava;
+	 private ArrayList<Avaria>itensavaFiltrados;
 	 private String acao;
 	 private Long codigo;
 	 private List<Fornecedor>listaFornecedor;
@@ -64,39 +66,56 @@ public class ProdutosBean {
 		this.acao = acao;
 	}
 	
-	public Produto getProduto() {
+	public Avaria getAvaria() {
 		
-		return produto;
+		return avaria;
 	}
 
 	//
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setAvaria(Avaria avaria) {
+		this.avaria = avaria;
 	}
 
-	 public ArrayList<Produto> getItens() {
-	 return itens;
+	 public ArrayList<Avaria> getitensava() {
+	 return itensava;
 	 }
 	
-	 public void setItens(ArrayList<Produto> itens) {
-	 this.itens = itens;
+	 public void setitensava(ArrayList<Avaria> itensava) {
+	 this.itensava = itensava;
 	 }
 	
 	
-	 public ArrayList<Produto> getItensFiltrados() {
-	 return itensFiltrados;
+	 public ArrayList<Avaria> getitensavaFiltrados() {
+	 return itensavaFiltrados;
 	 }
 	
-	 public void setItensFiltrados(ArrayList<Produto> itensFiltrados) {
-	 this.itensFiltrados = itensFiltrados;
+	 public void setitensavaFiltrados(ArrayList<Avaria> itensavaFiltrados) {
+	 this.itensavaFiltrados = itensavaFiltrados;
 	 }
+	 
+	 public ArrayList<Avaria> getItensava() {
+		return itensava;
+	}
+	 
+	 public void setItensava(ArrayList<Avaria> itensava) {
+		this.itensava = itensava;
+	}
+	 
+	 public ArrayList<Avaria> getItensavaFiltrados() {
+		return itensavaFiltrados;
+	}
+	 
+	 public void setItensavaFiltrados(ArrayList<Avaria> itensavaFiltrados) {
+		this.itensavaFiltrados = itensavaFiltrados;
+	}
+	 
 
 	// @PostConstruct
 	 public void prepararPesquisa(){
 		
 	 try {
-	 ProdutosDAO fdao = new ProdutosDAO();
-	 itens = (ArrayList<Produto>) fdao.listar();
+	 AvariasDAO fdao = new AvariasDAO();
+	 itensava = (ArrayList<Avaria>) fdao.listar();
 	
 	 } catch (RuntimeException e) {
 	 JSFUtil.adicionarMensagemErro("ex.getMessage()");
@@ -113,13 +132,13 @@ public class ProdutosBean {
 			
 			 if(codigo != null){
 								 
-				 ProdutosDAO fdao = new ProdutosDAO();	
-				 produto = fdao.buscarPorCodigo(codigo);
+				 AvariasDAO fdao = new AvariasDAO();	
+				 avaria = fdao.buscarPorCodigo(codigo);
 				 
 			 }
 			 else
 				 {
-				 produto = new Produto();
+				 avaria = new Avaria();
 				
 			 }
 			 
@@ -135,17 +154,17 @@ public class ProdutosBean {
 	 
 
 	 public void novo(){
-		 produto = new Produto();
+		 avaria = new Avaria();
 	 }
 
 	public void salvar() {
 
 		try {
-			ProdutosDAO fdao = new ProdutosDAO();
-			fdao.salvar(produto);
+			AvariasDAO fdao = new AvariasDAO();
+			fdao.salvar(avaria);
 			
-			produto = new Produto();
-			JSFUtil.adicionarMensagemSucesso("Produto salvo com sucesso!");
+			avaria = new Avaria();
+			JSFUtil.adicionarMensagemSucesso("Avaria salvo com sucesso!");
 
 		} catch (RuntimeException e) {
 			JSFUtil.adicionarMensagemErro("ex.getMessage()");
@@ -157,8 +176,8 @@ public class ProdutosBean {
 	
 	 public void excluir(){
 	 try {
-		 ProdutosDAO fdao = new ProdutosDAO();
-	 fdao.excluir(produto);
+		 AvariasDAO fdao = new AvariasDAO();
+	 fdao.excluir(avaria);
 	
 	
 	
@@ -176,8 +195,8 @@ public class ProdutosBean {
 	
 	 public void editar(){
 	 try {
-		 ProdutosDAO fdao = new ProdutosDAO();
-	 fdao.editar(produto);
+		 AvariasDAO fdao = new AvariasDAO();
+	 fdao.editar(avaria);
 	
 	
 	 JSFUtil.adicionarMensagemSucesso("Produto editado com sucesso!");
@@ -189,7 +208,7 @@ public class ProdutosBean {
 	 }
 	 
 	 @SuppressWarnings("deprecation")
-	 public void imprimir(){
+	 public void imprava(){
 		 
 		 try {
 		 

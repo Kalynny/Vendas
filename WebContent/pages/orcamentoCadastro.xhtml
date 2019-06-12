@@ -32,8 +32,8 @@ type="preRenderView" />
 filteredValue="#{MBOrcamentos.produtosFiltrados}"
 var="produto"
 rows="4"
-paginator="true"
->
+paginator="true">
+
 <p:column headerText="Código">
 <h:outputText value="#{produto.codigo}" />
 </p:column>
@@ -133,7 +133,7 @@ id="dial"
 
 <p:commandButton value="Salvar" 
 actionListener="#{MBOrcamentos.salvar}" 
-update=":msgGlobal :frmorccad:tbItensorc :frmorccad:txtOrcValorTotal"
+update=":msgGlobal :frmorccad :tbItensorc :frmorccad :txtOrcValorTotal"
 onclick="PF('dlgFinOrcamento').hide()"/>
 
 <p:button value="Voltar" 

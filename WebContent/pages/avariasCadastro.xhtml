@@ -48,21 +48,27 @@ readonly="#{MBProdutos.acao == 'Excluir'}"  >
 <f:validateBean />
 </p:inputText>
 
+<p:outputLabel value="Fornecedor:" />
+<p:inputText maxlength="50" size="20"  value="#{MBProdutos.produto.fornecedor.rsocial}"
+readonly="#{MBProdutos.acao == 'Excluir'}"  >
+<f:validateBean />
+</p:inputText>
+
+<p:outputLabel value="Motivo:" />
+<p:selectOneMenu  value="#{MBAvarias.avaria.motivo}" >
+ <f:selectItem itemValue="" itemLabel="Selecione um Motivo" />
+ <f:selectItem itemValue="Data de Vencimento Poximo" itemLabel="Data de Vencimento Proximo" />
+ <f:selectItem itemValue="Produto Estragado" itemLabel="Produto Estragado" />
+ <f:selectItem itemValue="Produto com Defeito" itemLabel="Produto com Defeito" />
+ </p:selectOneMenu>
+
+
 </h:panelGrid>
 
-<h:panelGrid columns="5">
-<p:commandButton value="Novo" actionListener="#{MBProdutos.novo}" 
-update=":msgGlobal :frmprocad:pnprocad"  rendered="#{MBProdutos.acao == 'Novo'}" />
+<h:panelGrid columns="4">
 
-<p:commandButton value="Salvar" actionListener="#{MBProdutos.editar}" 
-update=":msgGlobal :frmprocad:pnprocad" rendered="#{MBProdutos.acao == 'Editar'}"/> 
-
-<p:commandButton value="Excluir" actionListener="#{MBProdutos.excluir}" 
-update=":msgGlobal :frmprocad:pnprocad" rendered="#{MBProdutos.acao == 'Excluir'}" />
-
-<p:commandButton value="Editar"  actionListener="#{MBProdutos.editar}" 
-update=":msgGlobal :frmprocad:pnprocad" rendered="#{MBProdutos.acao == 'editar'}" />
-
+<p:commandButton value="Salvar" actionListener="#{MBAvarias.salvar}" 
+update=":msgGlobal :frmprocad:pnprocad" /> 
 <p:button value="Voltar" outcome="/pages/avariasPesquisa.xhtml" />
 
 </h:panelGrid>

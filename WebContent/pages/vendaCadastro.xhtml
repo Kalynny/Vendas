@@ -134,8 +134,8 @@ id="dial"
 
 <p:commandButton value="Salvar" 
 actionListener="#{MBVendas.salvar}" 
-update=":msgGlobal :frmvencad:tbItens :frmvencad:txtVenValorTotal"
-onclick="PF('dlgFinVenda').hide()"/>
+onclick="PF('dlgFinVenda').hide()"
+update=":msgGlobal :frmvencad :frmvencad"/>
 
 <p:button value="Voltar" 
 onclick="PF('dlgFinVenda').hide()" />

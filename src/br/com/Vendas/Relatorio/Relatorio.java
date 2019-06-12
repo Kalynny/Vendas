@@ -28,6 +28,8 @@ public class Relatorio {
 		
 			JasperViewer view = new JasperViewer(print, false);
 			view.show();
+			return;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			Messages.addGlobalError("Erro ao Gerar relatório");
@@ -77,6 +79,27 @@ public class Relatorio {
 			Messages.addGlobalError("Ocorreu um erro ao tentar gerar o relatório");
 			erro.printStackTrace();
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void relOrcamento(int cdOrcamento) {
+			Connection conexao = HibernateUtil.getConnection1();
+
+			Map<String, Object> parametros = new HashMap<>();
+			parametros.put("CD_ORC", cdOrcamento);
+			
+			String caminho = Faces.getRealPath("/reports/Orcamento.jasper");
+
+		try {
+			JasperPrint print = JasperFillManager.fillReport(caminho, parametros, conexao);
+		
+			JasperViewer view = new JasperViewer(print, false);
+			view.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Messages.addGlobalError("Erro ao Gerar relatório");
+		}
+		
 	}
 
 }

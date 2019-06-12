@@ -32,7 +32,7 @@
 		<!-- Criação das tabelas -->
 		<property name="hbm2ddl.auto">update</property>
 
-		<mapping class="br.com.Vendas.domain.Pessoa" />
+		<mapping class="br.com.Vendas.domain.Avaria" />
 		<mapping class="br.com.Vendas.domain.Itemusu" />
 		<mapping class="br.com.Vendas.domain.Usuario" />
 		<mapping class="br.com.Vendas.domain.Itemorc" />
